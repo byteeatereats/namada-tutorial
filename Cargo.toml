@@ -1,0 +1,16 @@
+[package]
+name = "namada-tutorial"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-std = "1.12.0"
+namada_sdk = { git = "https://github.com/anoma/namada.git", rev = "v0.28.1", features = [
+    "std",
+] }
+tendermint-rpc = { version = "0.34.0", default-features = false, features = [
+    "http-client",
+] }
+tokio = { version = "1.35.0", default-features = false }
