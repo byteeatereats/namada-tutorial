@@ -67,7 +67,7 @@ async fn main() -> std::io::Result<()> {
     let http_client = HttpClient::new("https://rpc.luminara.icu/").unwrap();
     // Remove wallet file if it exists
     let _ = fs::remove_file("wallet").await;
-    // Setup wallet storage
+    // Create new wallet directory to store wallet file
     let wallet = FsWalletUtils::new(PathBuf::from("wallet"));
     // Setup shielded context storage
     let shielded_ctx = FsShieldedUtils::new(Path::new("masp/").to_path_buf());
@@ -77,10 +77,10 @@ async fn main() -> std::io::Result<()> {
         .expect("unable to construct Namada object")
         .chain_id(ChainId::from_str("luminara.857cf638d323bbae2ed94").unwrap());
     // Generate accounts
-    let accounts = gen_accounts(&mut namada, 2).await;
+    let accounts = gen_accounts(&mut namada, 1).await;
     for account in &accounts {
         println!(
-            "Address: {:?} - Mnemonic: {:?}",
+            "\nAddress: {:?} - Mnemonic: {:?}\n",
             account.address, account.mnemonic,
         );
     }
